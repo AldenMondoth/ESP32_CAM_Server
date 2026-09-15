@@ -1,4 +1,5 @@
 build/
 sdkconfig
 sdkconfig.old
-
+.agent_reference.h
+CONVENTIONS.md
