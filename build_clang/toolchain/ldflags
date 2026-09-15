@@ -1,0 +1,4 @@
+-nostartfiles
+--ld-path=/home/atm/esp/tools/tools/esp-clang/esp-21.1.3_20260408/esp-clang/bin/xtensa-esp32s3-elf-clang-ld
+-z
+noexecstack

@@ -1,12 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>ESP-IDF: ESP32 Web Server</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ESP32-CAM Live View</title>
 </head>
 <body>
-<h1>ESP-IDF: ESP32 Web Server</h1>
-<p>Hello from ESP32!</p>
+    <h1>ESP32-CAM Live View</h1>
+    <canvas id="canvas" width="640" height="480" style="max-width: 100%; border: 1px solid #000;"></canvas>
+
+    <script>
+        window.addEventListener('load', () => {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+
+            const ws = new WebSocket(`ws://${window.location.host}/stream`);
+            ws.binaryType = 'blob';
+
+            ws.onopen = () => {
+                console.log('Connected to ESP32 WebSocket');
+            };
+
+            ws.onmessage = (event) => {
+                if (event.data instanceof Blob) {
+                    const img = new Image();
+                    const url = URL.createObjectURL(event.data);
+                    
+                    img.onload = () => {
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        URL.revokeObjectURL(url); // Clean up memory
+                    };
+                    img.src = url;
+                }
+            };
+
+            ws.onclose = () => console.log('WebSocket closed');
+            ws.onerror = (err) => console.error('WebSocket error:', err);
+        });
+    </script>
 </body>
 </html>
-

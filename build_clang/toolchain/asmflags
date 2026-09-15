@@ -1,0 +1,4 @@
+--target=xtensa-esp-elf
+-Xassembler
+--longcalls
+-mcpu=esp32s3
