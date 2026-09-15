@@ -1,2 +1,0 @@
---target=xtensa-esp-elf
--mcpu=esp32s3

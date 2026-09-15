@@ -1,6 +1,11 @@
 build/
+build_clang/
+managed_components/
+dependencies.lock
 sdkconfig
 sdkconfig.old
+sdkconfig.bak*
 .agent_reference.h
 CONVENTIONS.md
 .aider*
+
